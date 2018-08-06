@@ -53,5 +53,14 @@ gulp.task("devCss", function() {
 gulp.task("watch", function() {
     return gulp.watch("./src/scss/*.scss", gulp.series("devCss"))
 });
+//js的压缩
+gulp.task("devjsmin", function() {
+    return gulp.src("./src/js/*.js")
+        .pipe(babel({
+            presets: ["es2015"]
+        }))
+        .pipe(jsmin())
+        .pipe(gulp.dest("./src/js/gzip"))
+});
 //开发环境
-gulp.task("dev", gulp.series("devServer", "devCss", "watch"))
+gulp.task("dev", gulp.series("devServer", "devCss", "devjsmin", "watch"))
