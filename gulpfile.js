@@ -9,6 +9,8 @@ var server = require("gulp-webserver");
 var path = require("path");
 var fs = require("fs");
 var url = require("url");
+//引入json数据
+var data = require("./src/mock/data.json")
 
 //搭建服务
 gulp.task("devServer", function() {
@@ -30,7 +32,7 @@ gulp.task("devServer", function() {
                     } else {
                         switch (pathname) {
                             case "/api/swiper":
-                                res.end()
+                                res.end(JSON.stringify({ code: 0, msg: data }))
                                 break;
                             default:
                                 res.end()
